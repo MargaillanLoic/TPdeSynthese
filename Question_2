@@ -6,20 +6,19 @@
 #include <sys/types.h>
 
 
-void Fortune(){
+void main(){
 	char *prompt="enseash % ";
-	char *stringIn=malloc(64*sizeof(char));
-	int continuer=1;
-	while(continuer){
-		write(STDOUT_FILENO, prompt, strlen(prompt));
-		read(STDIN_FILENO, stringIn,64);
+	char *stringIn=malloc(64*sizeof(char));		// on alloue de la mémoire pour pouvoir écrire nos commandes
+	while(1){
+		write(STDOUT_FILENO, prompt, strlen(prompt));		
+		read(STDIN_FILENO, stringIn,64);			
 		if ((strncmp(stringIn, "fortune", strlen("fortune"))==0)){
-			pid_t pid=fork();
+			pid_t pid=fork();					// on duplique le processus pour que le fils seulement éxecute la fonction fortune
 			if (pid==0){
-				execlp("fortune","f",NULL);
+				execlp("fortune","f",NULL);			// permet d'éxecuter la fonction fortune dans le shell
 			}
 			else{
-				wait(NULL);
+				wait(NULL);					// le processus parent attend que le processus fils ait finit pour continuer
 			}	
 		}
 	}
@@ -27,7 +26,4 @@ void Fortune(){
 
 
 
-int main(){
-	Fortune();
-}
 
