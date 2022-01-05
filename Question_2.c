@@ -7,6 +7,9 @@
 
 
 void main(){
+	char* message = "$ ./enseash \nBienvenue dans le Shell ENSEA. \nPour quitter, tapez 'exit'. \n";
+	write(STDOUT_FILENO,message,strlen(message));
+	
 	char *prompt="enseash % ";
 	char *stringIn=malloc(64*sizeof(char));		// on alloue de la mémoire pour pouvoir écrire nos commandes
 	while(1){
