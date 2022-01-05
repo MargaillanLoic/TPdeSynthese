@@ -11,3 +11,5 @@ write(STDOUT_FILENO,message,strlen(message));
 int main(void){
 	accueil();
 }
+
+// 
