@@ -1,3 +1,5 @@
+// Bienvenue : initialisation du shell avec affichage d'un écran d'acceuil
+
 # include <string.h>
 # include <stdlib.h>
 # include <stdio.h>
