@@ -12,4 +12,5 @@ int main(void){
 	accueil();
 }
 
-// 
+//On utilise la fonction write pour afficher dans la console la chaine de caractère message
+//STDOUT_FILENO 
