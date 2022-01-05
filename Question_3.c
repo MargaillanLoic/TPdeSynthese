@@ -11,7 +11,7 @@ void main(){
 	
 	char *prompt="enseash % ";
 	char *stringIn=malloc(64*sizeof(char));
-	int continuer=1;
+	int continuer=1;					// variable qui controle la boucle
 	while(continuer){
 		write(STDOUT_FILENO, prompt, strlen(prompt));
 		read(STDIN_FILENO, stringIn,64);
@@ -24,8 +24,8 @@ void main(){
 				wait(NULL);
 			}	
 			
-		}else if ((strncmp(stringIn, "exit", strlen("exit"))==0)){
-			write(STDOUT_FILENO,"Bye bye...\n$\n", strlen("Bye bye...\n$\n"));
+		}else if ((strncmp(stringIn, "exit", strlen("exit"))==0)){				// on ajoute les 3 lignes qui suivent et on modifie la condition du while
+			write(STDOUT_FILENO,"Bye bye...\n$\n", strlen("Bye bye...\n$\n"));		// ce qui permet de sortir de la boucle si on écrit "exit"
 			continuer=0;
 		}
 	}
