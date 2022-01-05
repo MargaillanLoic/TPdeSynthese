@@ -1,3 +1,5 @@
+// Exit : Ajout d'une fonctionnalité pour sorti du shell
+
 # include <string.h>
 # include <stdlib.h>
 # include <stdio.h>
