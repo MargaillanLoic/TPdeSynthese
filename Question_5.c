@@ -15,17 +15,16 @@ int main(void)
 	int entree, status;
 	char *stringIn=malloc(64*sizeof(char));
 	char Etat[1];
-	char message[64]={0};
-	struct timespec start, stop;			//
+	char message[64]={0};				// chaine de caractère qui contiendra le temps écoulé pour l'execution d'une commande
+	struct timespec start, stop;			// Structures définies dans time.h qui permettent d'accéder aux secondes et aux nanosecondes
+	
 	write(STDOUT_FILENO, "Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n", strlen("Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n"));
 	
 	while(1){
 		write(STDOUT_FILENO, "enseash % ", strlen("enseash % "));
 		entree = read(STDIN_FILENO, stringIn, 64);
-	
-		
 		stringIn[entree-1] = '\0';
-		clock_gettime(CLOCK_REALTIME, &start);
+		clock_gettime(CLOCK_REALTIME, &start); 		// On récupère le temps dans la structure start lorsqu'on lance une commande 
 		int pid = fork();
 		if(pid==0){
 			
@@ -39,7 +38,7 @@ int main(void)
 			
 		//Dans le père:
 			wait(&status);
-			clock_gettime(CLOCK_REALTIME, &stop);
+			clock_gettime(CLOCK_REALTIME, &stop);		 // On récupère le temps dans la structure stop lorsqu'on finit la commande
 			float temps = (stop.tv_nsec - start.tv_nsec)/1000000;
 		
 			if(WIFEXITED(status)){
