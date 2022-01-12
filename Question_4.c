@@ -6,14 +6,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//Dans les questions précédentes, nous faisions en sorte que uniquement la commande fortune fonctionne.
-//Desormais, nous cherchons à ce que peut importe la commande rentrée dans le shell, celui ci l'execute. 
+//Dans 
 
 
 int main(void)
 {
 	int entree, status;
-	char *stringIn=malloc(64*sizeof(char)); //stringIn correspond à la chaîne de carractère de notre commande rentrée dans le Shell.
+	char *stringIn=malloc(64*sizeof(char));
 
 	char Etat[1];
 	write(STDOUT_FILENO, "Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n", strlen("Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n"));
@@ -35,16 +34,16 @@ int main(void)
 		else if(pid!=0){
 		//Dans le père:
 			wait(&status);
-		
-			if(WIFEXITED(status)){
+			
+			if(WIFEXITED(status)){								// WIFEXITED(status) == true si le fils s’est terminé normalement
 				write(STDOUT_FILENO, "enseash [exit:", strlen("enseash [exit:")); 
-				Etat[0] = (WEXITSTATUS(status))+'0'; 
+				Etat[0] = (WEXITSTATUS(status))+'0'; 					// WEXITSTATUS(status) renvoie dans ce cas la valeur de sortie du fils
 				write(STDOUT_FILENO, Etat, 1); 
 				write(STDOUT_FILENO,  "] %", strlen( "] %")); 
 			}
-				else if(WIFSIGNALED(status)){
+				else if(WIFSIGNALED(status)){						// WIFSIGNALED(status) == true si le fils s’est terminé à cause d’un signal
 				write(STDOUT_FILENO, "enseash [sign:", strlen("enseash [sign:"));
-				Etat[0] = (WTERMSIG(status))+'0';
+				Etat[0] = (WTERMSIG(status))+'0';					// WTERMSIG(status) renvoie alors le numéro du signal qui a causé la fin du fils
 				write(STDOUT_FILENO, Etat, 1);
 				write(STDOUT_FILENO,  "] %", strlen( "] %"));
 			}
