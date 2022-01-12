@@ -26,7 +26,7 @@ int main(void)
 		int pid = fork();
 		if(pid==0){
 		//Dans le fils:
-			int retour = execlp(stringIn, stringIn,NULL);					// Comme expliqué dans la Q3, le 
+			int retour = execlp(stringIn, stringIn,NULL);					// Maintenant, le fils execute n'importe quelle commande entrée dans le shell
 			if (retour ==-1){ 
 				exit(EXIT_FAILURE);
 			}
@@ -41,7 +41,7 @@ int main(void)
 				write(STDOUT_FILENO, Etat, 1); 
 				write(STDOUT_FILENO,  "] %", strlen( "] %")); 
 			}
-				else if(WIFSIGNALED(status)){						// WIFSIGNALED(status) == true si le fils s’est terminé à cause d’un signal
+			else if(WIFSIGNALED(status)){							// WIFSIGNALED(status) == true si le fils s’est terminé à cause d’un signal
 				write(STDOUT_FILENO, "enseash [sign:", strlen("enseash [sign:"));
 				Etat[0] = (WTERMSIG(status))+'0';					// WTERMSIG(status) renvoie alors le numéro du signal qui a causé la fin du fils
 				write(STDOUT_FILENO, Etat, 1);
