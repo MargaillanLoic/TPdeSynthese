@@ -12,7 +12,7 @@
 
 int main(void)
 {
-	int nbCharCommande, status;
+	int entree, status;
 	char *stringIn=malloc(64*sizeof(char));
 	char Etat[1];
 	char message[64]={0};
@@ -21,13 +21,14 @@ int main(void)
 	
 	while(1){
 		write(STDOUT_FILENO, "enseash % ", strlen("enseash % "));
-		nbCharCommande = read(STDIN_FILENO, stringIn, 64);
+		entree = read(STDIN_FILENO, stringIn, 64);
 	
 		
-		stringIn[nbCharCommande-1] = '\0';
+		stringIn[entree-1] = '\0';
 		clock_gettime(CLOCK_REALTIME, &start);
 		int pid = fork();
 		if(pid==0){
+			
 		//Dans le fils:
 			int retour = execlp(stringIn, stringIn,NULL);
 			if (retour ==-1){ 
@@ -35,6 +36,7 @@ int main(void)
 			}
 		}
 		else if(pid!=0){
+			
 		//Dans le père:
 			wait(&status);
 			clock_gettime(CLOCK_REALTIME, &stop);
@@ -49,7 +51,7 @@ int main(void)
 				write(STDOUT_FILENO,  "] %", strlen( "] %")); 
 
 			}
-				else if(WIFSIGNALED(status)){
+			else if(WIFSIGNALED(status)){
 				write(STDOUT_FILENO, "enseash [sign:", strlen("enseash [sign:"));
 				Etat[0] = (WTERMSIG(status))+'0';
 				sprintf(message, "%d|%.2f ms",WEXITSTATUS(status), temps);
@@ -60,7 +62,7 @@ int main(void)
 			}
 		}
 		
-		if(!strncmp("exit",stringIn,4) || (nbCharCommande == 0)){ 
+		if(!strncmp("exit",stringIn,4) || (entree == 0)){ 
 			write(STDOUT_FILENO, "Bye bye ...\n", strlen("Bye bye ...\n"));
 			exit(EXIT_SUCCESS); 
 		}
