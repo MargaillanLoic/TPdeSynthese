@@ -12,7 +12,7 @@
 int main(void)
 {
 	int entree, status;
-	char *stringIn=malloc(64*sizeof(char));
+	char *stringIn=malloc(64*sizeof(char));  //strinIn correspond à la chaine de caractère de notre commande rentrée dans le Shell.
 
 	char Etat[1];
 	write(STDOUT_FILENO, "Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n", strlen("Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n"));
