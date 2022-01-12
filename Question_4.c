@@ -26,7 +26,7 @@ int main(void)
 		int pid = fork();
 		if(pid==0){
 		//Dans le fils:
-			int retour = execlp(stringIn, stringIn,NULL);					// Maintenant, le fils execute n'importe quelle commande entrée dans le shell
+			int retour = execlp(stringIn, stringIn,NULL);			// Maintenant, le fils execute n'importe quelle commande entrée dans le shell
 			if (retour ==-1){ 
 				exit(EXIT_FAILURE);
 			}
@@ -35,15 +35,15 @@ int main(void)
 		//Dans le père:
 			wait(&status);
 			
-			if(WIFEXITED(status)){								// WIFEXITED(status) == true si le fils s’est terminé normalement
+			if(WIFEXITED(status)){						// WIFEXITED(status) == true si le fils s’est terminé normalement
 				write(STDOUT_FILENO, "enseash [exit:", strlen("enseash [exit:")); 
-				Etat[0] = (WEXITSTATUS(status))+'0'; 					// WEXITSTATUS(status) renvoie dans ce cas la valeur de sortie du fils
+				Etat[0] = (WEXITSTATUS(status))+'0'; 			// WEXITSTATUS(status) renvoie dans ce cas la valeur de sortie du fils
 				write(STDOUT_FILENO, Etat, 1); 
 				write(STDOUT_FILENO,  "] %", strlen( "] %")); 
 			}
-			else if(WIFSIGNALED(status)){							// WIFSIGNALED(status) == true si le fils s’est terminé à cause d’un signal
+			else if(WIFSIGNALED(status)){					// WIFSIGNALED(status) == true si le fils s’est terminé à cause d’un signal
 				write(STDOUT_FILENO, "enseash [sign:", strlen("enseash [sign:"));
-				Etat[0] = (WTERMSIG(status))+'0';					// WTERMSIG(status) renvoie alors le numéro du signal qui a causé la fin du fils
+				Etat[0] = (WTERMSIG(status))+'0';			// WTERMSIG(status) renvoie alors le numéro du signal qui a causé la fin du fils
 				write(STDOUT_FILENO, Etat, 1);
 				write(STDOUT_FILENO,  "] %", strlen( "] %"));
 			}
@@ -51,8 +51,8 @@ int main(void)
 		
 		if(!strncmp("exit",stringIn,4) || (entree == 0)){ 
 			write(STDOUT_FILENO, "Bye bye ...\n", strlen("Bye bye ...\n"));
-			exit(EXIT_SUCCESS); 
-		}
-	}
+			exit(EXIT_SUCCESS); 							// Simplification de la fonction de sortie, on quitte directement le 
+		}										// shell lors de l'écriture de la commande "exit" au lieu de d'abord 
+	}											// quitter la boucle while
 	exit(EXIT_SUCCESS); 
 }
