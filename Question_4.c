@@ -23,10 +23,7 @@ int main(void)
 		write(STDOUT_FILENO, "enseash % ", strlen("enseash % "));
 		nbCharCommande = read(STDIN_FILENO, stringIn, 64);
 	
-		if(!strncmp("exit",stringIn,4) || (nbCharCommande == 0)){ 
-			write(STDOUT_FILENO, "Bye bye ...\n", strlen("Bye bye ...\n"));
-			exit(EXIT_SUCCESS); 
-		}
+		
 		stringIn[nbCharCommande-1] = '\0';
 		int pid = fork();
 		if(pid==0){
@@ -36,7 +33,7 @@ int main(void)
 				exit(EXIT_FAILURE);
 			}
 		}
-		else{
+		else if(pid!=0){
 		//Dans le père:
 			wait(&status);
 		
@@ -52,6 +49,11 @@ int main(void)
 				write(STDOUT_FILENO, Etat, 1);
 				write(STDOUT_FILENO,  "] %", strlen( "] %"));
 			}
+		}
+		
+		if(!strncmp("exit",stringIn,4) || (nbCharCommande == 0)){ 
+			write(STDOUT_FILENO, "Bye bye ...\n", strlen("Bye bye ...\n"));
+			exit(EXIT_SUCCESS); 
 		}
 	}
 	exit(EXIT_SUCCESS); 
