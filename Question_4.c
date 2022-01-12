@@ -6,13 +6,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//Dans 
+//Dans les questions précédentes, nous faisions en sorte que uniquement la commande fortune fonctionne.
+//Desormais, nous cherchons à ce que peut importe la commande rentrée dans le shell, celui ci l'execute. 
 
 
 int main(void)
 {
 	int entree, status;
-	char *stringIn=malloc(64*sizeof(char));
+	char *stringIn=malloc(64*sizeof(char)); //stringIn correspond à la chaîne de carractère de notre commande rentrée dans le Shell.
 
 	char Etat[1];
 	write(STDOUT_FILENO, "Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n", strlen("Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n"));
