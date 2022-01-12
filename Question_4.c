@@ -4,8 +4,6 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <stdlib.h>
-#include <time.h>
-#include <fcntl.h>
 #include <stdio.h>
 
 
@@ -13,7 +11,7 @@
 
 int main(void)
 {
-	int nbCharCommande, status;
+	int entree, status;
 	char *stringIn=malloc(64*sizeof(char));
 
 	char Etat[1];
@@ -21,10 +19,10 @@ int main(void)
 	
 	while(1){
 		write(STDOUT_FILENO, "enseash % ", strlen("enseash % "));
-		nbCharCommande = read(STDIN_FILENO, stringIn, 64);
+		entree = read(STDIN_FILENO, stringIn, 64);
 	
 		
-		stringIn[nbCharCommande-1] = '\0';
+		stringIn[entree-1] = '\0';
 		int pid = fork();
 		if(pid==0){
 		//Dans le fils:
