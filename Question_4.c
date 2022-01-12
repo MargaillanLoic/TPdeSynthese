@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//Dans 
-
+//Dans les questions précédentes, nous faisions en sorte que uniquement la commande fortune fonctionne.
+//Desormais, nous cherchons à ce que peut importe la commande rentrée dans le shell, celui ci l'execute. 
 
 int main(void)
 {
