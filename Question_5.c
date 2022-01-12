@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
+#include <time.h>			// On ajoute la librairie suivante pour pouvoir utiliser les horloges
 
 
 
@@ -16,7 +16,7 @@ int main(void)
 	char *stringIn=malloc(64*sizeof(char));
 	char Etat[1];
 	char message[64]={0};
-	struct timespec tempsD, tempsF;
+	struct timespec start, stop;			//
 	write(STDOUT_FILENO, "Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n", strlen("Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n"));
 	
 	while(1){
@@ -25,7 +25,7 @@ int main(void)
 	
 		
 		stringIn[nbCharCommande-1] = '\0';
-		clock_gettime(CLOCK_REALTIME, &tempsD);
+		clock_gettime(CLOCK_REALTIME, &start);
 		int pid = fork();
 		if(pid==0){
 		//Dans le fils:
@@ -37,8 +37,8 @@ int main(void)
 		else if(pid!=0){
 		//Dans le père:
 			wait(&status);
-			clock_gettime(CLOCK_REALTIME, &tempsF);
-			float temps = (tempsF.tv_nsec - tempsD.tv_nsec)/1000000;
+			clock_gettime(CLOCK_REALTIME, &stop);
+			float temps = (stop.tv_nsec - start.tv_nsec)/1000000;
 		
 			if(WIFEXITED(status)){
 				write(STDOUT_FILENO, "enseash [exit:", strlen("enseash [exit:")); 
