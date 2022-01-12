@@ -49,7 +49,7 @@ int main(void)
 			}
 		}
 		
-		if(!strncmp("exit",stringIn,4) || (nbCharCommande == 0)){ 
+		if(!strncmp("exit",stringIn,4) || (entree == 0)){ 
 			write(STDOUT_FILENO, "Bye bye ...\n", strlen("Bye bye ...\n"));
 			exit(EXIT_SUCCESS); 
 		}
