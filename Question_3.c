@@ -17,9 +17,9 @@ void main(){
 	while(continuer){
 		write(STDOUT_FILENO, prompt, strlen(prompt));
 		read(STDIN_FILENO, stringIn,64);
-		if ((strncmp(stringIn, "fortune", strlen("fortune"))==0)){
-			pid_t pid=fork();
-			if (pid==0){
+		if ((strncmp(stringIn, "fortune", strlen("fortune"))==0)){				// Attention, en procédant comme ceci, seule la commande fortune peut être 
+			pid_t pid=fork();								// executée. On change la manière de procéder par la suite pour executer 
+			if (pid==0){									// toutes les commandes
 				execlp("fortune","f",NULL);
 			}
 			else{
