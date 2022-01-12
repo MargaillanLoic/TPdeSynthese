@@ -26,7 +26,7 @@ int main(void)
 		int pid = fork();
 		if(pid==0){
 		//Dans le fils:
-			int retour = execlp(stringIn, stringIn,NULL);
+			int retour = execlp(stringIn, stringIn,NULL);					// Comme expliqué dans la Q3, le 
 			if (retour ==-1){ 
 				exit(EXIT_FAILURE);
 			}
