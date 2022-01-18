@@ -25,6 +25,7 @@ int main(void)
 		entree = read(STDIN_FILENO, stringIn, 64);
 		stringIn[entree-1] = '\0';
 		clock_gettime(CLOCK_REALTIME, &start); 		// On récupère le temps dans la structure start lorsqu'on lance une commande 
+		
 		int pid = fork();
 		if(pid==0){
 			
@@ -38,8 +39,8 @@ int main(void)
 			
 		//Dans le père:
 			wait(&status);
-			clock_gettime(CLOCK_REALTIME, &stop);		 // On récupère le temps dans la structure stop lorsqu'on finit la commande
-			float temps = (stop.tv_nsec - start.tv_nsec)/1000000;
+			clock_gettime(CLOCK_REALTIME, &stop);				 // On récupère le temps dans la structure stop lorsqu'on finit la commande
+			float temps = (stop.tv_nsec - start.tv_nsec)/1000000;		 // On divise ici le temps écoulé (en ns) pour afficher le résultat en ms
 		
 			if(WIFEXITED(status)){
 				write(STDOUT_FILENO, "enseash [exit:", strlen("enseash [exit:")); 
