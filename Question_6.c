@@ -27,12 +27,12 @@ int main(void)
 		stringIn[entree-1] = '\0';
 		clock_gettime(CLOCK_REALTIME, &start); 		
 		
-    int i =0;
+   		int i =0;
 		token=strtok(stringIn,Delimitation);               // "strtok" coupe la chaine de caractère contenue dans "stringIn" jusqu'à "Delimitation", puis la stock
 		while (token!=NULL){                               // dans "token". Cette commande modifie la chaine de caractère original "stringIn".
 			ArgList[i]=token;                                             
 			token=strtok(NULL,Delimitation);
-			i++;                                             // A la fin de la boucle, les éléments de "ArgList" sont les différentes chaines de caractères séparées 
+			i++;                                       // A la fin de la boucle, les éléments de "ArgList" sont les différentes chaines de caractères séparées 
 		}                                                  // d'un espace de la commande initialement entrée dans le shell.
 		ArgList[i] =(char*) NULL;                          // Le reste de la liste est défini comme "NULL".
     
@@ -42,7 +42,7 @@ int main(void)
 		//Dans le fils: On utilise maintenant "execvp(const char *I,char *const J[])", qui execute la commande défini dans I, avec la liste de ses arguments défini dans J.
 			int retour = execvp(ArgList[0], ArgList);        //  Le premier élément de "ArgList" contient la commande.
 			if (retour ==-1){ 
-        write(STDOUT_FILENO, "ERROR \n", strlen("ERROR \n"));
+       				write(STDOUT_FILENO, "ERROR \n", strlen("ERROR \n"));
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -74,7 +74,7 @@ int main(void)
 			exit(EXIT_SUCCESS); 
 		}
     
-    free(token);                                  // On libère ensuite la mémoire allouée à "token" et "stringIn".
+   		free(token);                                  // On libère ensuite la mémoire allouée à "token" et "stringIn".
 		free(stringIn);
 	}
 	exit(EXIT_SUCCESS); 
