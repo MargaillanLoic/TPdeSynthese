@@ -14,12 +14,16 @@ void main(){
 	char *stringIn=malloc(64*sizeof(char));		// on alloue de la mémoire pour pouvoir écrire nos commandes
 	while(1){
 		write(STDOUT_FILENO, prompt, strlen(prompt));		
-		read(STDIN_FILENO, stringIn,64);			
+		read(STDIN_FILENO, stringIn,64);				// La chaine de caractère entrée dans le shell est stockée dans stringIn
 		if ((strncmp(stringIn, "fortune", strlen("fortune"))==0)){
 			pid_t pid=fork();					// on duplique le processus pour que le fils seulement éxecute la fonction fortune
+			
+			// Dans le fils :
 			if (pid==0){
 				execlp("fortune","f",NULL);			// permet d'éxecuter la fonction fortune dans le shell
 			}
+			
+			// Dans le père :
 			else{
 				wait(NULL);					// le processus parent attend que le processus fils ait finit pour continuer
 			}	
