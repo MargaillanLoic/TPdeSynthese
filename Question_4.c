@@ -27,7 +27,7 @@ int main(void)
 		if(pid==0){
 		//Dans le fils:
 			int retour = execlp(stringIn, stringIn,NULL);			// Maintenant, le fils execute n'importe quelle commande entrée dans le shell
-			if (retour ==-1){ 
+			if (retour ==-1){ 						// (à condition que celle-ci soit définie).
 				exit(EXIT_FAILURE);
 			}
 		}
