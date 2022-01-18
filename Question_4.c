@@ -13,16 +13,15 @@ int main(void)
 {
 	int entree, status;
 	char *stringIn=malloc(64*sizeof(char));  //strinIn correspond à la chaine de caractère de notre commande rentrée dans le Shell.
-
 	char Etat[1];
+	
 	write(STDOUT_FILENO, "Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n", strlen("Bienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n"));
 	
 	while(1){
 		write(STDOUT_FILENO, "enseash % ", strlen("enseash % "));
 		entree = read(STDIN_FILENO, stringIn, 64);
-	
-		
 		stringIn[entree-1] = '\0';
+		
 		int pid = fork();
 		if(pid==0){
 		//Dans le fils:
@@ -32,7 +31,8 @@ int main(void)
 			}
 		}
 		else if(pid!=0){
-		//Dans le père:
+			
+		// Dans le père :
 			wait(&status);
 			
 			if(WIFEXITED(status)){						// WIFEXITED(status) == true si le fils s’est terminé normalement
