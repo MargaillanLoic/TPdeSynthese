@@ -14,7 +14,6 @@ int main(void)
 {
 	int entree, status;
 	char *stringIn=malloc(64*sizeof(char));
-	char Etat[1];
 	char message[64]={0};				// chaine de caractère qui contiendra le temps écoulé pour l'execution d'une commande
 	struct timespec start, stop;			// Structures définies dans time.h qui permettent d'accéder aux secondes et aux nanosecondes
 	
@@ -44,19 +43,15 @@ int main(void)
 		
 			if(WIFEXITED(status)){
 				write(STDOUT_FILENO, "enseash [exit:", strlen("enseash [exit:")); 
-				Etat[0] = (WEXITSTATUS(status))+'0'; 
 				sprintf(message, "%d|%.2f ms",WEXITSTATUS(status), temps);
 				write(STDOUT_FILENO,message,strlen(message));
-				write(STDOUT_FILENO, Etat, 1); 
 				write(STDOUT_FILENO,  "] %", strlen( "] %")); 
 
 			}
 			else if(WIFSIGNALED(status)){
 				write(STDOUT_FILENO, "enseash [sign:", strlen("enseash [sign:"));
-				Etat[0] = (WTERMSIG(status))+'0';
 				sprintf(message, "%d|%.2f ms",WEXITSTATUS(status), temps);
 				write(STDOUT_FILENO,message,strlen(message));
-				write(STDOUT_FILENO, Etat, 1);
 				write(STDOUT_FILENO,  "] %", strlen( "] %"));
 
 			}
